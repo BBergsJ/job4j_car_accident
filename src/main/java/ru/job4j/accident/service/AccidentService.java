@@ -4,13 +4,18 @@ import org.springframework.stereotype.Service;
 import ru.job4j.accident.model.Accident;
 import ru.job4j.accident.repository.AccidentMem;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
 public class AccidentService {
+    private AccidentMem accidentMem;
 
-    public static List<Accident> findAll() {
-        return new ArrayList<>(new AccidentMem().getAccidents().values());
+    public AccidentService(AccidentMem accidentMem) {
+        this.accidentMem = accidentMem;
     }
+
+    public List<Accident> findAll() {
+        return accidentMem.findAll();
+    }
+
 }
