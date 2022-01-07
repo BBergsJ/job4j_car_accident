@@ -12,6 +12,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 @Repository
 public class AccidentMem {
     private final HashMap<Integer, Accident> accidents = new HashMap<>();
+    private final static AtomicInteger ID = new AtomicInteger(5);
 
 
     public AccidentMem() {
@@ -22,8 +23,18 @@ public class AccidentMem {
         accidents.put(5, new Accident("Name_5", "Text_5", "Address_5"));
     }
 
+    public void create(Accident accident) {
+        if (accident.getId() == 0) {
+            accident.setId(ID.incrementAndGet());
+        }
+        accidents.put(accident.getId(), accident);
+    }
+
     public List<Accident> findAll() {
         return new ArrayList<>(accidents.values());
     }
 
+    public Accident findById(int id) {
+        return accidents.get(id);
+    }
 }

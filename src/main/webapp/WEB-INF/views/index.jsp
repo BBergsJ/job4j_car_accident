@@ -25,6 +25,7 @@
                 <th>name</th>
                 <th>text</th>
                 <th>address</th>
+                <th>edit</th>
             </tr>
             </thead>
             <tbody>
@@ -34,12 +35,15 @@
                     <td>${accident.name}</td>
                     <td>${accident.text}</td>
                     <td>${accident.address}</td>
+                    <td><a href="<c:url value='/edit?id=${accident.id}'/>">edit</a></td>
                 </tr>
             </c:forEach>
             </tbody>
         </table>
 
     </div>
+
+    <a href="<c:url value='/create'/>">Добавить инцидент</a>
 
 </div>
 </body>
