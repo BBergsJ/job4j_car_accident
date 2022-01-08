@@ -9,7 +9,7 @@
     <title>Accident App</title>
 </head>
 <body>
-<form  action="<c:url value='/update?id=${accident.id}'/>" method='POST'>
+<form  action="<c:url value='/save?id=${accident.id}'/>" method='POST'>
     <table>
         <tr>
             <td>Название:</td>

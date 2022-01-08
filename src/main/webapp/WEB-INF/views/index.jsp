@@ -35,7 +35,7 @@
                     <td>${accident.name}</td>
                     <td>${accident.text}</td>
                     <td>${accident.address}</td>
-                    <td><a href="<c:url value='/edit?id=${accident.id}'/>">edit</a></td>
+                    <td><a href="<c:url value='/update?id=${accident.id}'/>">edit</a></td>
                 </tr>
             </c:forEach>
             </tbody>
