@@ -36,13 +36,7 @@ public class AccidentMem {
             accident.setId(ID.incrementAndGet());
         }
         accident.setType(findTypeById(accident.getType().getId()));
-        Set<Rule> rsl = new HashSet<>();
-        if (rules != null) {
-            rsl = Arrays.stream(rules)
-                    .map(Integer::parseInt)
-                    .map(this::findRuleById)
-                    .collect(Collectors.toSet());
-        }
+
         accident.setRules(rsl);
         accidents.put(accident.getId(), accident);
     }
