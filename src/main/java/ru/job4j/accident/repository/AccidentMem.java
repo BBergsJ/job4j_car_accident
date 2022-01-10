@@ -31,6 +31,7 @@ public class AccidentMem {
         if (accident.getId() == 0) {
             accident.setId(ID.incrementAndGet());
         }
+        accident.setType(findTypeById(accident.getType().getId()));
         accidents.put(accident.getId(), accident);
     }
 
