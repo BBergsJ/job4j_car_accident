@@ -9,6 +9,7 @@ import ru.job4j.accident.service.AccidentService;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Repository
 public class AccidentMem {
@@ -36,7 +37,13 @@ public class AccidentMem {
             accident.setId(ID.incrementAndGet());
         }
         accident.setType(findTypeById(accident.getType().getId()));
-
+        Set<Rule> rsl = new HashSet<>();
+        if (rules != null) {
+            rsl = Arrays.stream(rules)
+                    .map(Integer::parseInt)
+                    .map(this::findRuleById)
+                    .collect(Collectors.toSet());
+        }
         accident.setRules(rsl);
         accidents.put(accident.getId(), accident);
     }
