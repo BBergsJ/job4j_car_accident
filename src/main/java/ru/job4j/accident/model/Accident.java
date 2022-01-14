@@ -11,12 +11,14 @@ public class Accident {
     private AccidentType type;
     private Set<Rule> rules;
 
-    public Accident(String name, String text, String address, AccidentType type, Set<Rule> rules) {
-        this.name = name;
-        this.text = text;
-        this.address = address;
-        this.type = type;
-        this.rules = rules;
+    public static Accident of(String name, String text, String address, AccidentType type, Set<Rule> rules) {
+        Accident accident = new Accident();
+        accident.name = name;
+        accident.text = text;
+        accident.address = address;
+        accident.type = type;
+        accident.rules = rules;
+        return accident;
     }
 
     public int getId() {
