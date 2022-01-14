@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import ru.job4j.accident.model.Accident;
 import ru.job4j.accident.model.AccidentType;
 import ru.job4j.accident.model.Rule;
+import ru.job4j.accident.repository.AccidentJdbcTemplate;
 import ru.job4j.accident.service.AccidentService;
 
 import javax.servlet.http.HttpServletRequest;
@@ -17,31 +18,31 @@ import java.util.List;
 
 @Controller
 public class AccidentControl {
-    private AccidentService accidentService;
+    private final AccidentJdbcTemplate accidents;
 
-    public AccidentControl(AccidentService accidentService) {
-        this.accidentService = accidentService;
+    public AccidentControl(AccidentJdbcTemplate accidents) {
+        this.accidents = accidents;
     }
 
     @GetMapping("/create")
     public String create(Model model) {
-        model.addAttribute("rules", accidentService.findAllRules());
-        model.addAttribute("types", accidentService.findAllTypes());
+        model.addAttribute("rules", accidents.findAllRules());
+        model.addAttribute("types", accidents.findAllTypes());
         return "accident/create";
     }
 
     @GetMapping("/update")
     public String edit(@RequestParam("id") int id, Model model) {
-        model.addAttribute("rules", accidentService.findAllRules());
-        model.addAttribute("types", accidentService.findAllTypes());
-        model.addAttribute("accident", accidentService.findById(id));
+        model.addAttribute("rules", accidents.findAllRules());
+        model.addAttribute("types", accidents.findAllTypes());
+        model.addAttribute("accident", accidents.findById(id));
         return "accident/edit";
     }
 
     @PostMapping("/save")
     public String save(@ModelAttribute Accident accident, HttpServletRequest request) {
         String[] ids = request.getParameterValues("rIds");
-        accidentService.create(accident, ids);
+        accidents.create(accident, ids);
         return "redirect:/";
     }
 }

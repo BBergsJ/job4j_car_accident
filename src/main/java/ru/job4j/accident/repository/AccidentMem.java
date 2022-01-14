@@ -25,11 +25,11 @@ public class AccidentMem {
         types.put(1, AccidentType.of(1, "Две машины"));
         types.put(2, AccidentType.of(2, "Машина и человек"));
         types.put(3, AccidentType.of(3, "Машина и велосипед"));
-        accidents.put(1, new Accident("Name_1", "Text_1", "Address_1", types.get(1), new HashSet<>(rules.values())));
-        accidents.put(2, new Accident("Name_2", "Text_2", "Address_2", types.get(2), new HashSet<>(rules.values())));
-        accidents.put(3, new Accident("Name_3", "Text_3", "Address_3", types.get(3), new HashSet<>(rules.values())));
-        accidents.put(4, new Accident("Name_4", "Text_4", "Address_4", types.get(1), new HashSet<>(rules.values())));
-        accidents.put(5, new Accident("Name_5", "Text_5", "Address_5", types.get(2), new HashSet<>(rules.values())));
+        accidents.put(1, Accident.of("Name_1", "Text_1", "Address_1", types.get(1), new HashSet<>(rules.values())));
+        accidents.put(2, Accident.of("Name_2", "Text_2", "Address_2", types.get(2), new HashSet<>(rules.values())));
+        accidents.put(3, Accident.of("Name_3", "Text_3", "Address_3", types.get(3), new HashSet<>(rules.values())));
+        accidents.put(4, Accident.of("Name_4", "Text_4", "Address_4", types.get(1), new HashSet<>(rules.values())));
+        accidents.put(5, Accident.of("Name_5", "Text_5", "Address_5", types.get(2), new HashSet<>(rules.values())));
     }
 
     public void create(Accident accident, String[] rules) {
