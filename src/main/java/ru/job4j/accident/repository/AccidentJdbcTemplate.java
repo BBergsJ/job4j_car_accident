@@ -4,6 +4,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 import ru.job4j.accident.model.Accident;
 import ru.job4j.accident.model.AccidentType;
 import ru.job4j.accident.model.Rule;
@@ -21,6 +22,7 @@ public class AccidentJdbcTemplate {
         this.jdbc = jdbc;
     }
 
+    @Transactional
     public Accident create(Accident accident, String[] rules) {
         Set<Rule> rsl = new HashSet<>();
         if (rules != null) {
