@@ -17,8 +17,8 @@ CREATE TABLE accident (
 );
 
 CREATE TABLE accident_rules (
-    acc_id int references accident,
-    rule_id int references rules
+    accident_id int references accident,
+    rules_id int references rules
 );
 
 INSERT INTO rules (name) VALUES ('Статья. 1'), ('Статья. 2'), ('Статья. 3');

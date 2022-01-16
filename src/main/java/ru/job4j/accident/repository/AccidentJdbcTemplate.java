@@ -14,7 +14,7 @@ import java.sql.Statement;
 import java.util.*;
 import java.util.stream.Collectors;
 
-@Repository
+//@Repository
 public class AccidentJdbcTemplate {
     private final JdbcTemplate jdbc;
 
@@ -52,7 +52,7 @@ public class AccidentJdbcTemplate {
                 return ps;
                 }, keyHolder);
         accident.getRules().forEach(rule ->
-                        jdbc.update("insert into accident_rules (acc_id, rule_id) values (?, ?)",
+                        jdbc.update("insert into accident_rules (accident_id, rules_id) values (?, ?)",
                         keyHolder.getKeys().get("id"), rule.getId())
                 );
         return accident;
@@ -67,8 +67,8 @@ public class AccidentJdbcTemplate {
                 accident.getId()
         );
         for (Rule rule : accident.getRules()) {
-            jdbc.update("delete from accident_rules where acc_id = ?", accident.getId());
-            jdbc.update("insert into accident_rules (acc_id, rule_id) values (?, ?)",
+            jdbc.update("delete from accident_rules where accident_id = ?", accident.getId());
+            jdbc.update("insert into accident_rules (accident_id, rules_id) values (?, ?)",
                     accident.getId(),
                     rule.getId());
         }
@@ -79,11 +79,11 @@ public class AccidentJdbcTemplate {
         Map<Integer, Accident> accidentMap = new HashMap<>();
         jdbc.query("select a.*, t.name type_name, r.id rule_id, r.name rule_name from accident a "
                         + "inner join types t on a.type_id = t.id "
-                        + "inner join accident_rules ar on a.id = ar.acc_id "
-                        + "inner join rules r on ar.rule_id = r.id",
+                        + "inner join accident_rules ar on a.id = ar.accident_id "
+                        + "inner join rules r on ar.rules_id = r.id",
                 (rs, row) -> {
                     AccidentType type = AccidentType.of(rs.getInt("type_id"), rs.getString("type_name"));
-                    Rule rule = Rule.of(rs.getInt("rule_id"), rs.getString("rule_name"));
+                    Rule rule = Rule.of(rs.getInt("rules_id"), rs.getString("rule_name"));
                     Accident accident = accidentMap.get(rs.getInt("id"));
                     if (accident == null) {
                         accident = Accident.of(
@@ -106,11 +106,11 @@ public class AccidentJdbcTemplate {
         Accident rsl = new Accident();
         jdbc.query("select a.*, t.name type_name, r.id rule_id, r.name rule_name from accident a "
                         + "inner join types t on a.type_id = t.id "
-                        + "inner join accident_rules ar on a.id = ar.acc_id "
-                        + "inner join rules r on ar.rule_id = r.id where a.id = ?",
+                        + "inner join accident_rules ar on a.id = ar.accident_id "
+                        + "inner join rules r on ar.rules_id = r.id where a.id = ?",
             (res, row) -> {
                 AccidentType type = AccidentType.of(res.getInt("type_id"), res.getString("type_name"));
-                Rule rule = Rule.of(res.getInt("rule_id"), res.getString("rule_name"));
+                Rule rule = Rule.of(res.getInt("rules_id"), res.getString("rule_name"));
                 if (rsl.getId() == 0) {
                     rsl.setId(id);
                     rsl.setName(res.getString("name"));
