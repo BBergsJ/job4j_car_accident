@@ -16,7 +16,7 @@ import java.util.stream.Collectors;
 
 import static ru.job4j.accident.repository.HibernateUtil.tx;
 
-@Repository
+/*@Repository*/
 public class AccidentHibernate {
     private final SessionFactory sf;
 
