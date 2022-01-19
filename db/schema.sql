@@ -23,3 +23,16 @@ CREATE TABLE accident_rules (
 
 INSERT INTO rules (name) VALUES ('Статья. 1'), ('Статья. 2'), ('Статья. 3');
 INSERT INTO types (name) VALUES ('Две машины'), ('Машина и человек'), ('Машина и велосипед');
+
+CREATE TABLE users (
+    username VARCHAR(50) NOT NULL,
+    password VARCHAR(100) NOT NULL,
+    enabled boolean default true,
+    PRIMARY KEY (username)
+);
+
+CREATE TABLE authorities (
+    username VARCHAR(50) NOT NULL,
+    authority VARCHAR(50) NOT NULL,
+    FOREIGN KEY (username) REFERENCES users(username)
+);

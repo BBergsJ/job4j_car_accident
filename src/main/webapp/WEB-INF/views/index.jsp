@@ -13,7 +13,9 @@
 <div class="container pt-3">
 
     <h4>
-        Login as : ${user}
+        <div>
+            Login as : ${user.username}
+        </div>
     </h4>
 
     <div class="row">
