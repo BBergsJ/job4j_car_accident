@@ -16,7 +16,6 @@
         <div>
             Login as : ${user.username}
         </div>
-        <a href="<c:url value='/reg'/>">Регистрация</a>
     </h4>
 
     <div class="row">
